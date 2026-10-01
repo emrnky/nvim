@@ -7,7 +7,12 @@ return {
         "MunifTanjim/nui.nvim",
     },
     config = function()
-        vim.keymap.set("n", "<C-b>", ":Neotree filesystem reveal left <CR>", {})
+        vim.keymap.set("n", "<C-a>", function()
+            if vim.bo.filetype == "neo-tree" then
+                vim.cmd("Neotree close")
+            else
+                vim.cmd("Neotree focus filesystem reveal left")
+            end
+        end, { silent = true, desc = "Neo-tree: focus / close" })
     end
-
 }
